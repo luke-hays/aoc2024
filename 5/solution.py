@@ -1,5 +1,3 @@
-from itertools import permutations
-
 sampleTextPath = './sample.txt'
 puzzleTextPath = './puzzle.txt'
 
@@ -14,13 +12,6 @@ def verifyUpdateCorrectness(update, vertices):
     x, y = update[j], update[j+1]
     if y not in vertices[x]: return False
   return True
-
-# def fixOrder(update, i, vertices):
-#   if len(update) <= 1 : 
-#     return True
-  
-#   left = fixOrder(update[:i], i-1) and verifyUpdateCorrectness(update[:i+1], vertices)
-#   right = fixOrder(update[i+1:], i+1) and verifyUpdateCorrectness(update[:i+1], vertices)
 
 def solve(input):
   result1 = 0
@@ -43,26 +34,21 @@ def solve(input):
 
     vertices[v].append(e)
 
-  incorrectUpdates = []
   for i in range(secondInstructionIndex, len(input)):
     update = [int(n) for n in input[i].split(',')]
     if verifyUpdateCorrectness(update, vertices):
       result1 += update[len(update)//2]
     else:
-      incorrectUpdates.append(update)
-
-  for update in incorrectUpdates:
-    n = len(update)
-    for i in range(n):
-      swapped = False
-      for j in range(0, n-i-1):
-        if update[j] not in vertices[j+1]:
-          update[j], update[j+1] = update[j+1], update[j]
-          swapped = True
-      if (swapped == False):
-        break
-
-    
+      n = len(update)
+      for i in range(n):
+        swapped = False
+        for j in range(0, n-i-1):
+          if update[j] not in vertices[update[j+1]]:
+            update[j], update[j+1] = update[j+1], update[j]
+            swapped = True
+        if (swapped == False):
+          break
+      result2 += update[len(update)//2]    
 
   print("Result 1: ", result1)
   print("Result 2: ", result2)
