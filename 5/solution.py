@@ -52,12 +52,17 @@ def solve(input):
       incorrectUpdates.append(update)
 
   for update in incorrectUpdates:
-    perms = permutations(update)
-    for perm in perms:
-      print(perm)
-      if verifyUpdateCorrectness(perm, vertices):
-        result2 += perm[len(perm)//2]
+    n = len(update)
+    for i in range(n):
+      swapped = False
+      for j in range(0, n-i-1):
+        if update[j] not in vertices[j+1]:
+          update[j], update[j+1] = update[j+1], update[j]
+          swapped = True
+      if (swapped == False):
         break
+
+    
 
   print("Result 1: ", result1)
   print("Result 2: ", result2)
