@@ -1,3 +1,5 @@
+from functools import cmp_to_key
+
 sampleTextPath = './sample.txt'
 puzzleTextPath = './puzzle.txt'
 
@@ -39,15 +41,7 @@ def solve(input):
     if verifyUpdateCorrectness(update, vertices):
       result1 += update[len(update)//2]
     else:
-      n = len(update)
-      for i in range(n):
-        swapped = False
-        for j in range(0, n-i-1):
-          if update[j] not in vertices[update[j+1]]:
-            update[j], update[j+1] = update[j+1], update[j]
-            swapped = True
-        if (swapped == False):
-          break
+      update = sorted(update, key=cmp_to_key(lambda x, y: 1 if x not in vertices[y] else -1))
       result2 += update[len(update)//2]    
 
   print("Result 1: ", result1)
