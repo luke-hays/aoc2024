@@ -57,7 +57,7 @@ def analyzePath(input, originalPos, detectCycles, newObstacle):
     
     pos = [x, y]
   
-  return cycles if detectCycles else len(memo)
+  return cycles if detectCycles else memo
 
 def solve(input):
   result2 = 0
@@ -67,13 +67,13 @@ def solve(input):
     for j in range(len(input[i])):
       if input[i][j] == '^': originalPos = [i, j]
 
-  print("Result 1: ", analyzePath(input, originalPos, False, []))
+  paths = analyzePath(input, originalPos, False, [])
+  print("Result 1: ", len(paths))
 
-  for i in range(len(input)):
-    for j in range(len(input[i])):
-      if input[i][j] == '#': continue
-      if input[i][j] == '^': continue
-      result2 += analyzePath(input, originalPos, True, [i, j])
+  for path in paths:
+    i, j = path
+    if input[i][j] == '#' or input[i][j] == '^': continue
+    result2 += analyzePath(input, originalPos, True, [i, j])
 
   print("Result 2: ", result2)
   
