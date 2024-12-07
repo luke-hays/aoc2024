@@ -70,6 +70,3 @@ print("------------------")
 print("Puzzle")
 solve(puzzleInput)
 print("------------------")
-
-# too lo
-# 66343330033151
