@@ -1,5 +1,3 @@
-from functools import reduce
-
 sampleTextPath = './sample.txt'
 puzzleTextPath = './puzzle.txt'
 
