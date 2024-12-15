@@ -90,6 +90,3 @@ print("------------------")
 print("Puzzle")
 solve(puzzleInput)
 print("------------------")
-
-# To low
-# 15928.0
